@@ -19,8 +19,8 @@
 # USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.from datetime import datetime
 from django.db import models
 
-from dicom_models.production.utils import conversions
-from dicom_models.production.models.base import Base
+from dicom_models.core.utils import conversions
+from dicom_models.core.models.base import Base
 
 __all__ = ('Encounter',)
 

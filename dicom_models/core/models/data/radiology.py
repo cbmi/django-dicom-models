@@ -20,7 +20,7 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 
-from dicom_models.production.models.base import Base
+from dicom_models.core.models.base import Base
 
 __all__ = ('RadiologyStudy',)
 
