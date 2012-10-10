@@ -2,7 +2,6 @@
 
 from django.db import models
 from dicom_models.core import models as core
-from vocab.managers import ItemThroughManager
 
 APP_LABEL = 'dicom_production'
 
