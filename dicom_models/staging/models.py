@@ -20,7 +20,7 @@
 from django.db import models
 from dicom_models.production import models as production
 
-APP_LABEL = 'staging'
+APP_LABEL = 'dicom_staging'
 
 class Base(models.Model):
     class Meta(object):
