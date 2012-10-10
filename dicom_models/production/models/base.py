@@ -21,7 +21,7 @@ from datetime import datetime
 from django.db import models
 
 __all__ = ('Base',)
-APP_LABLEL = 'dicom_production'
+APP_LABEL = 'dicom_production'
 
 class Base(models.Model):
     """
@@ -33,7 +33,7 @@ class Base(models.Model):
 
     class Meta(object):
         abstract = True
-        app_label = APP_LABLEL
+        app_label = APP_LABEL
 
     def save(self):
         now = datetime.now()
