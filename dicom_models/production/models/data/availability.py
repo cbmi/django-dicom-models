@@ -20,7 +20,7 @@
 from django.db import models
 from django.db.models import Q
 
-from production.models.base import Base
+from dicom_models.production.models.base import Base
 
 __all__ = ('DataAvailability',)
 
