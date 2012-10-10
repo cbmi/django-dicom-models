@@ -18,7 +18,7 @@
 # WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
 # USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.from datetime import datetime
 from django.db import models
-from core import models as core
+from production import models as production
 
 APP_LABEL = 'staging'
 
@@ -27,7 +27,7 @@ class Base(models.Model):
         abstract = True
         app_label = APP_LABEL
 
-class Patient(core.Patient, Base):
+class Patient(production.Patient, Base):
     pass
 
 # The below models are bound to the Patient model via a ForeignKey
@@ -39,7 +39,7 @@ class PatientMixin(Base):
     class Meta(Base.Meta):
         abstract = True
 
-class Encounter(core.Encounter, PatientMixin):
+class Encounter(production.Encounter, PatientMixin):
     pass
 
 # The next level of organization is the encounter
@@ -53,7 +53,7 @@ class EncounterMixin(PatientMixin):
     class Meta(PatientMixin.Meta):
         abstract = True
 
-class RadiologyStudy(core.RadiologyStudy, EncounterMixin):
+class RadiologyStudy(production.RadiologyStudy, EncounterMixin):
     original_study_uid = models.CharField(null=True, max_length=64)
     reviewed = models.BooleanField(default=False)
     reviewer = models.CharField(max_length=100)
@@ -73,7 +73,7 @@ class RadiologyStudy(core.RadiologyStudy, EncounterMixin):
     class Meta(object):
         verbose_name_plural = "Radiology Studies"
 
-class RadiologyStudyReview(core.base.Base):
+class RadiologyStudyReview(production.base.Base):
     study = models.ForeignKey(RadiologyStudy)
     user_id = models.IntegerField()
     has_phi = models.NullBooleanField("Has PHI?", default=None, help_text="This study contains images with PHI burnt in.")

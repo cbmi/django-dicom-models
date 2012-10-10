@@ -22,8 +22,8 @@ from datetime import date, timedelta
 
 from django.db import models
 
-from core.utils import conversions
-from core.models.base import Base
+from production.utils import conversions
+from production.models.base import Base
 
 __all__ = ('PatientPhi', 'Patient')
 
