@@ -37,8 +37,9 @@ setup(
     ],
     packages=['dicom_models',
         'dicom_models.production',
-        'dicom_models.production.models',
-        'dicom_models.production.models.data',
-        'dicom_models.production.utils',
+        'dicom_models.core',
+        'dicom_models.core.models',
+        'dicom_models.core.models.data',
+        'dicom_models.core.utils',
         'dicom_models.staging',],
 )
