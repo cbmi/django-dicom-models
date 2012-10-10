@@ -13,8 +13,26 @@ class Base(models.Model):
 class Patient(core.Patient, Base):
     pass
 
+class PatientMixin(Base):
+    "A mixin that provides a foreign key reference to Patient"
+    patient = models.ForeignKey(Patient)
+
+    class Meta(Base.Meta):
+        abstract = True
+
+
 class Encounter(core.Encounter, PatientMixin):
     pass
+
+class EncounterMixin(PatientMixin):
+    """A mixin that provides a foreign key reference to Encounter as well as
+    a reference the Patient. This future-proofs the model for new query
+    capabilities that ignores the encounter constraint.
+    """
+    encounter = models.ForeignKey(Encounter)
+
+    class Meta(PatientMixin.Meta):
+        abstract = True
 
 class RadiologyStudy(core.RadiologyStudy, EncounterMixin):
     pass
