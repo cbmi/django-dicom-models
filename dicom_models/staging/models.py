@@ -39,6 +39,19 @@ class PatientMixin(Base):
     class Meta(Base.Meta):
         abstract = True
 
+# The below models are uniqely bound to the Patient model via a 
+# OneToOne relationship. Every must patient instance must have
+# an associated object for each one of the below models.
+class UniquePatientMixin(Base):
+    "A mixin that provides a one2one reference to Patient"
+    patient = models.OneToOneField(Patient)
+
+    class Meta(Base.Meta):
+        abstract = True
+
+class PatientPhi(core.PatientPhi, UniquePatientMixin):
+    pass
+
 class Encounter(core.Encounter, PatientMixin):
     pass
 
