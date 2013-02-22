@@ -25,28 +25,15 @@ from dicom_models.core.models.base import Base
 __all__ = ('DataAvailability',)
 
 class DataAvailability(Base):
-    # genetics
-    has_snp_chip = models.BooleanField(default=False)
-    has_gene_mutation = models.BooleanField(default=False)
 
     # imaging
     has_radiology_study = models.BooleanField(default=False)
     has_mri = models.BooleanField(default=False)
     has_ct = models.BooleanField(default=False)
 
-    # audiometry
-    has_abr = models.BooleanField(default=False)
-    has_audiogram = models.BooleanField(default=False)
-    has_oae = models.BooleanField(default=False)
 
     class Meta(object):
         abstract = True
-
-    def _has_genotype(self):
-        return self.patient.genotype_set.exists()
-
-    def _has_gene_mutation(self):
-        return self.patient.clinicalmutation_set.exists()
 
     def _has_radiology_study(self):
         return self.patient.radiologystudy_set.exists()
@@ -61,15 +48,6 @@ class DataAvailability(Base):
         queryset = self.patient.radiologystudy_set.filter(modality__iexact='ct')
         return queryset.exists()
 
-    def _has_abr(self):
-        return self.patient.abrtest_set.exists()
-
-    def _has_audiogram(self):
-        return self.patient.audiogramtest_set.exists()
-
-    def _has_oae(self):
-        return self.patient.otoacousticemissiontest_set.exists()
-
     def reset_calculated_fields(self, save=False):
         """Run a set of queries to test for the existence of certain data
         for the associated patient.
@@ -77,8 +55,6 @@ class DataAvailability(Base):
         This should be called immediately prior to pushing this data to
         production.
         """
-        self.has_snp_chip = self._has_genotype()
-        self.has_gene_mutation = self._has_gene_mutation()
         self.has_radiology_study = self._has_radiology_study()
         # since MRIs and CTs are modalities of radiology studies, only test
         # if there are any studies to begin with
@@ -88,10 +64,6 @@ class DataAvailability(Base):
         else:
             self.has_ct = False
             self.has_mri = False
-
-        self.has_abr = self._has_abr()
-        self.has_audiogram = self._has_audiogram()
-        self.has_oae = self._has_oae()
 
         if save:
             self.save()
