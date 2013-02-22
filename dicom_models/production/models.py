@@ -20,7 +20,13 @@ class PatientMixin(Base):
     class Meta(Base.Meta):
         abstract = True
 
+class UniquePatientMixin(Base):
+    "A mixin that provides a one2one reference to Patient"
+    patient = models.OneToOneField(Patient)
 
+    class Meta(Base.Meta):
+        abstract = True
+        
 class Encounter(core.Encounter, PatientMixin):
     pass
 
@@ -35,4 +41,7 @@ class EncounterMixin(PatientMixin):
         abstract = True
 
 class RadiologyStudy(core.RadiologyStudy, EncounterMixin):
+    pass
+
+class DataAvailability(core.DataAvailability, UniquePatientMixin):
     pass
