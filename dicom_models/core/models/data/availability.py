@@ -36,7 +36,10 @@ class DataAvailability(Base):
         abstract = True
 
     def _has_radiology_study(self):
-        return self.patient.radiologystudy_set.exists()
+        queryset = self.patient.radiologystudy_set.filter(
+            Q(modality__iexact='mr') | Q(modality__iexact='mri') | Q(modality__iexact='mr')
+        )
+        return queryset.exists()
 
     def _has_mri(self):
         queryset = self.patient.radiologystudy_set.filter(
