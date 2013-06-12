@@ -67,15 +67,15 @@ class EncounterMixin(PatientMixin):
         abstract = True
 
 class RadiologyStudy(core.RadiologyStudy):
-    original_study_uid = models.CharField(null=True, max_length=64)
+    original_study_uid = models.CharField(null=True, max_length=64, blank=True)
     requested = models.BooleanField(default=False)
     exclude = models.BooleanField(default=False)
-    image_published = models.BooleanField(default=False)
-    pub_date = models.DateTimeField(null=True)
-    study_date = models.DateTimeField(null=True)
-    accession_no = models.CharField(max_length=20)
+    image_published = models.BooleanField(default=False, blank=True)
+    pub_date = models.DateTimeField(null=True, blank=True)
+    study_date = models.DateTimeField(null=True, blank=True)
+    accession_no = models.CharField(max_length=20, blank=True)
     high_risk_flag = models.BooleanField(default=False)
-    high_risk_message = models.CharField(null=True, max_length=500);
+    high_risk_message = models.CharField(null=True, max_length=500, blank=True);
 
     class Meta(object):
         verbose_name_plural = "Radiology Studies"

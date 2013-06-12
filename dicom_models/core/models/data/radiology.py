@@ -25,12 +25,12 @@ from dicom_models.core.models.base import Base
 __all__ = ('RadiologyStudy',)
 
 class RadiologyStudy(Base):
-    study_uid = models.CharField(max_length=64, null=True)
-    modality  = models.CharField(max_length=5, null=True)
-    sop_class = models.CharField(max_length=30, null=True)
-    number_of_series = models.IntegerField(null=True)
-    total_images = models.IntegerField(null=True)
-    impression = models.TextField(null=True)
+    study_uid = models.CharField(max_length=64, null=True, blank=True)
+    modality  = models.CharField(max_length=5, null=True, blank=True)
+    sop_class = models.CharField(max_length=30, null=True, blank=True)
+    number_of_series = models.IntegerField(null=True, blank=True)
+    total_images = models.IntegerField(null=True, blank=True)
+    impression = models.TextField(null=True, blank=True)
 
     class Meta(object):
         abstract = True
