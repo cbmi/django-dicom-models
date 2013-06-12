@@ -68,20 +68,12 @@ class EncounterMixin(PatientMixin):
 
 class RadiologyStudy(core.RadiologyStudy, EncounterMixin):
     original_study_uid = models.CharField(null=True, max_length=64)
-    reviewed = models.BooleanField(default=False)
-    reviewer = models.CharField(max_length=100)
-    has_phi = models.NullBooleanField("Has PHI?", default=None, help_text="This study contains images with PHI burnt in.")
     requested = models.BooleanField(default=False)
-    relevant = models.BooleanField("Relevant?", default=False, help_text="This study contains relevant images.")
     exclude = models.BooleanField(default=False)
     image_published = models.BooleanField(default=False)
     pub_date = models.DateTimeField(null=True)
     study_date = models.DateTimeField(null=True)
     accession_no = models.CharField(max_length=20)
-    has_protocol_series = models.BooleanField("Has a protocol series?", default=True,help_text="This study has a patient protocol series.")
-    reconstruction = models.BooleanField("Has facial reconstruction?", default=False)
-    comment = models.TextField("Reviewer Comment", blank=True)
-    user_id = models.IntegerField()
 
     class Meta(object):
         verbose_name_plural = "Radiology Studies"
