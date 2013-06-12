@@ -74,8 +74,8 @@ class RadiologyStudy(core.RadiologyStudy):
     pub_date = models.DateTimeField(null=True)
     study_date = models.DateTimeField(null=True)
     accession_no = models.CharField(max_length=20)
-    suspect_flag = models.BooleanField(default=False)
-    suspect_flag_message = models.CharField(null=True, max_length=500);
+    high_risk_flag = models.BooleanField(default=False)
+    high_risk_message = models.CharField(null=True, max_length=500);
 
     class Meta(object):
         verbose_name_plural = "Radiology Studies"
