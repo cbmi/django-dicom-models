@@ -66,7 +66,7 @@ class EncounterMixin(PatientMixin):
     class Meta(PatientMixin.Meta):
         abstract = True
 
-class RadiologyStudy(core.RadiologyStudy, EncounterMixin):
+class RadiologyStudy(core.RadiologyStudy):
     original_study_uid = models.CharField(null=True, max_length=64)
     requested = models.BooleanField(default=False)
     exclude = models.BooleanField(default=False)
