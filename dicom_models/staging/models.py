@@ -77,6 +77,9 @@ class RadiologyStudy(core.RadiologyStudy):
     high_risk_flag = models.BooleanField(default=False)
     high_risk_message = models.CharField(null=True, max_length=500, blank=True);
 
+    def __unicode__(self):
+        return u'Study UID %s' % (self.original_study_uid or 'Unknown')
+
     class Meta(object):
         verbose_name_plural = "Radiology Studies"
 
