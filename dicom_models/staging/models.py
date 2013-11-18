@@ -76,6 +76,9 @@ class RadiologyStudy(core.RadiologyStudy, EncounterMixin):
     accession_no = models.CharField(max_length=20, blank=True)
     high_risk_flag = models.BooleanField(default=False)
     high_risk_message = models.CharField(null=True, max_length=500, blank=True);
+    processing_error_date = models.DateTimeField(null=True, blank=True)
+    processing_error = models.NullBooleanField(default=None)
+    processing_error_msg = models.CharField(null=True, max_length=400, blank=True)
 
     def __unicode__(self):
         return u'Study UID %s' % (self.original_study_uid or 'Unknown')
